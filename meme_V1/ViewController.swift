@@ -11,20 +11,25 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     //MARK: Properties
+    
     //components properties
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var cameraBtn: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareBtn: UIBarButtonItem!
+    
     //nab and tool bar properties
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var toolBar: UIToolbar!
+    
     //boolean properties
     var isTopEditied = false
     var isBottonEditied = false
+    
     //final meme properties
     var memedImage = UIImage()
+    
     //text field attributes properties
     let memeTextFieldAttributes: [NSAttributedString.Key: Any] = [
         .strokeColor:UIColor.black,
@@ -37,12 +42,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         //setting textfield attribues and values
         setInitalTextfields()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //Desiable camera button if resource is unavaliable
+        //Disable share button
         shareBtn.isEnabled = false
+        //Disable camera button if resource is unavaliable
         cameraBtn.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
     
@@ -100,20 +105,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: Selecting and Retriving an Image to be Memed
     
-    //Taking a picture with camera
-    @IBAction func takePicture(_ sender: Any){
-        let cameraImage = UIImagePickerController()
-        cameraImage.delegate = self
-        cameraImage.sourceType = .camera
-        present(cameraImage, animated: true, completion: nil)
-    }
-    
-    //selecting picture from photo library
-    @IBAction func selectPicture(_ sender: Any){
-        let libraryImage = UIImagePickerController()
-        libraryImage.delegate = self
-        libraryImage.sourceType = .photoLibrary
-        present(libraryImage, animated: true, completion: nil)
+    //Taking a picture with camera or selecting picture from photo library
+    @IBAction func takeOrSelectPicture(_ sender: Any){
+        let senderBtn = sender as? UIBarButtonItem
+        let selectImage = UIImagePickerController()
+        selectImage.delegate = self
+        if senderBtn?.tag == 0{
+            selectImage.sourceType = .camera
+        } else if senderBtn?.tag == 1{
+            selectImage.sourceType = .photoLibrary
+        }
+        
+        present(selectImage, animated: true, completion: nil)
     }
     
     //setting the selected/taken image to the imageView and closing the image picker
@@ -150,11 +153,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: Generating and Saving Memed Image
     
+    //Savinf memed image in-app
     func saveMeme(){
-        print("Saved me in app")
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memeImage.image!)
     }
     
+    //Creating the memed image
     func generateMemedImage() -> UIImage {
         //Hide toolbar and navbar
         self.toolBar.isHidden = true

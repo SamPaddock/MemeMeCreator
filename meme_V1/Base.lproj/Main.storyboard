@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,37 +13,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="meme_V1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RaV-Po-376">
-                                <rect key="frame" x="0.0" y="85" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="41" width="375" height="582"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jju-q2-U2m">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Fnx-05-FE5"/>
                                     <barButtonItem image="camera.fill" catalog="system" id="c3A-S0-awR">
                                         <connections>
-                                            <action selector="takePicture:" destination="BYZ-38-t0r" id="Rdt-j2-X7T"/>
+                                            <action selector="takeOrSelectPicture:" destination="BYZ-38-t0r" id="2dq-tR-flk"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="48" style="plain" systemItem="fixedSpace" id="oUx-3P-kVg"/>
-                                    <barButtonItem title="Library" id="sii-1x-TEk">
+                                    <barButtonItem tag="1" title="Library" id="sii-1x-TEk">
                                         <connections>
-                                            <action selector="selectPicture:" destination="BYZ-38-t0r" id="hfC-ij-9iF"/>
+                                            <action selector="takeOrSelectPicture:" destination="BYZ-38-t0r" id="t2c-l8-EQv"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hS4-wf-qjY"/>
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vxL-6h-vOn">
-                                <rect key="frame" x="20" y="777.33333333333337" width="374" height="18.666666666666629"/>
+                                <rect key="frame" x="20" y="582.5" width="335" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2f-Lh-A6Y">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Meme" id="9XB-4M-7Yh">
                                         <barButtonItem key="leftBarButtonItem" image="square.and.arrow.up" catalog="system" id="ayz-x8-t6u">
@@ -60,7 +60,7 @@
                                 </items>
                             </navigationBar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qx1-Cj-ag7">
-                                <rect key="frame" x="20" y="113" width="374" height="18.666666666666657"/>
+                                <rect key="frame" x="20" y="69" width="335" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
@@ -69,7 +69,9 @@
                         <constraints>
                             <constraint firstItem="N2f-Lh-A6Y" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3L2-q4-GqS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vxL-6h-vOn" secondAttribute="bottom" constant="66" id="5m1-MP-Dor"/>
-                            <constraint firstItem="RaV-Po-376" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="41" id="BtM-QM-xVl"/>
+                            <constraint firstItem="RaV-Po-376" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="41" id="BtM-QM-xVl">
+                                <variation key="heightClass=compact-widthClass=compact" constant="32"/>
+                            </constraint>
                             <constraint firstItem="Jju-q2-U2m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Cox-Ac-gRF"/>
                             <constraint firstItem="RaV-Po-376" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FeA-2D-hMy"/>
                             <constraint firstItem="RaV-Po-376" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OkA-AX-aOZ"/>
