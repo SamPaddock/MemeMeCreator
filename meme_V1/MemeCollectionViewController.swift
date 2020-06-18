@@ -25,6 +25,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     
     //reinitlize collection view with sent meme to update with new sent meme
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.collectionView.reloadData()
     }
     

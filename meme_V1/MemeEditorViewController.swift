@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditorViewController.swift
 //  meme_V1
 //
 //  Created by Sarah Al-Matawah on 03/06/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     //MARK: Properties
     
@@ -53,9 +53,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(_ animated: Bool) {
         //Disable share button and text fields
         enableComponent(false)
-        shareBtn.isEnabled = false
-        topTextField.isEnabled = false
-        bottomTextField.isEnabled = false
         //Disable camera button if resource is unavaliable
         cameraBtn.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
@@ -164,7 +161,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //Canceling current meme and returning to sent meme view
     @IBAction func cancelResetMeme(_ sender: Any) {
-        self.navigationController?.popToViewController(self, animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: Generating and Saving Memed Image
@@ -179,8 +176,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //Creating the memed image
     func generateMemedImage() -> UIImage {
         //Hide toolbar and navbar
-        self.toolBar.isHidden = true
-        self.navigationBar.isHidden = true
+        isBarHidden(true)
 
         // Creating memed image from view elements
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -189,10 +185,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
 
         //Show toolbar and navbar
-        self.toolBar.isHidden = false
-        self.navigationBar.isHidden = false
+        isBarHidden(false)
 
         return createdMemedImage
+    }
+    
+    //Hide/Show toolbar and navbar
+    func isBarHidden(_ isBarHidden: Bool){
+        self.toolBar.isHidden = isBarHidden
+        self.navigationBar.isHidden = isBarHidden
     }
     
     
