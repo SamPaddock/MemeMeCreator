@@ -16,51 +16,51 @@ class MemeTableViewController: UITableViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.sharedMeme
     }
+    
+    //MARK: View Creation
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
     }
     
-    
+    //reinitlize table view with sent meme to update with new sent meme
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
-        for i in 0..<getMeme.count {
-            print("table row will appear \(i)")
-            print(getMeme[i].topText)
-        }
     }
 
     // MARK: - Table view data source
 
+    //table has one section only
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+    //get number of sent memes to set number of rowa
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        print("table rows \(getMeme.count)")
         return getMeme.count
     }
-
     
+    //Fill row with sent memes
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "memeCell", for: indexPath)
-        print("table row \(indexPath.row) has \(getMeme[indexPath.row].topText)")
-        cell.imageView?.image = getMeme[indexPath.row].memedImage
-        cell.textLabel?.text = getMeme[indexPath.row].topText
-        cell.detailTextLabel?.text = getMeme[indexPath.row].bottomText
+        let cell = tableView.dequeueReusableCell(withIdentifier: "memeCell", for: indexPath) as! MemeTableViewCell
+        
+        cell.memeLabel.text = getMeme[indexPath.row].topText + " " + getMeme[indexPath.row].bottomText
+        cell.memeImage.image = getMeme[indexPath.row].memedImage
+        
 
         return cell
     }
     
-   
-    // MARK: - Table view delegate
+    // MARK: - Table View Delegate
     
+    //When row selected, display the meme in a detailed meme view controller
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailedVC = self.storyboard!.instantiateViewController(identifier: "DetailedMemeViewController") as! DetailedMemeViewController
+        detailedVC.memeDetail = self.getMeme[indexPath.row]
+        self.navigationController?.pushViewController(detailedVC, animated: true)
+    }
+    
+    //Set row height
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }

@@ -11,6 +11,8 @@ import Foundation
 
 class MemeCollectionViewCell: UICollectionViewCell {
     
+    //MARK: Cell Properties
+    
     @IBOutlet weak var imageMemeCell: UIImageView!
     
 }

@@ -51,10 +51,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //Disable share button
+        //Disable share button and text fields
+        enableComponent(false)
         shareBtn.isEnabled = false
+        topTextField.isEnabled = false
+        bottomTextField.isEnabled = false
         //Disable camera button if resource is unavaliable
         cameraBtn.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+    
+    //MARK: Enable Buttons and Testfield
+    
+    func enableComponent(_ isEnable: Bool){
+        shareBtn.isEnabled = isEnable
+        topTextField.isEnabled = isEnable
+        bottomTextField.isEnabled = isEnable
     }
     
     //MARK: Text Field Delegates
@@ -131,7 +142,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         memeImage.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         dismiss(animated: true, completion: nil)
         //Enable share button
-        shareBtn.isEnabled = true
+        enableComponent(true)
     }
     
     //MARK: Sharing and canceling Meme
@@ -143,7 +154,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         shareActivity.completionWithItemsHandler = { (activity, completed, _, error) in
             if completed {
                 self.saveMeme()
-
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print(error.debugDescription)
@@ -152,13 +162,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(shareActivity, animated: true, completion: nil)
     }
     
-    //Canceling current meme and setting all elements to inital settings
+    //Canceling current meme and returning to sent meme view
     @IBAction func cancelResetMeme(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-//        memeImage.image = .none
-//        shareBtn.isEnabled = false
-//        setInitalTextfields()
+        self.navigationController?.popToViewController(self, animated: true)
     }
     
     //MARK: Generating and Saving Memed Image
@@ -168,7 +174,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memedImage)
         //save Meme to shared meme property
         appDelegate.sharedMeme.append(meme)
-        print("meme \(meme.topText) \(meme.bottomText) saved")
     }
     
     //Creating the memed image
