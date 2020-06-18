@@ -12,6 +12,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     //MARK: Properties
     
+    var tableVC = MemeTableViewController()
+    var collectionVC = MemeCollectionViewController()
+    
+    //AppDelegate to access shared properties
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     //components properties
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var cameraBtn: UIBarButtonItem!
@@ -110,6 +116,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let senderBtn = sender as? UIBarButtonItem
         let selectImage = UIImagePickerController()
         selectImage.delegate = self
+        //Checks which toolbar itemBtn was clicked
         if senderBtn?.tag == 0{
             selectImage.sourceType = .camera
         } else if senderBtn?.tag == 1{
@@ -136,6 +143,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         shareActivity.completionWithItemsHandler = { (activity, completed, _, error) in
             if completed {
                 self.saveMeme()
+
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print(error.debugDescription)
@@ -146,16 +154,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //Canceling current meme and setting all elements to inital settings
     @IBAction func cancelResetMeme(_ sender: Any) {
-        memeImage.image = .none
-        shareBtn.isEnabled = false
-        setInitalTextfields()
+        
+        self.dismiss(animated: true, completion: nil)
+//        memeImage.image = .none
+//        shareBtn.isEnabled = false
+//        setInitalTextfields()
     }
     
     //MARK: Generating and Saving Memed Image
     
-    //Savinf memed image in-app
+    //Saving memed image in-app
     func saveMeme(){
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memeImage.image!)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: memeImage.image!, memedImage: memedImage)
+        //save Meme to shared meme property
+        appDelegate.sharedMeme.append(meme)
+        print("meme \(meme.topText) \(meme.bottomText) saved")
     }
     
     //Creating the memed image
@@ -220,4 +233,6 @@ struct Meme{
     let originalImage: UIImage
     let memedImage: UIImage
 }
+
+
 
