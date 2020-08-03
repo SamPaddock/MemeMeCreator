@@ -1,5 +1,5 @@
 # meme_V1
-An application to creat and share memes with other. The memes can be saved in app after sharing and can be saved in the photos application.
+An application to create and share memes with others. The memes can be saved in-app after sharing and can be saved in the Photos application.
 
 
 ## Introduction
