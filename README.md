@@ -1,15 +1,11 @@
 # meme_V1
-* The application is developed to meet the requirments for the second and third project in the udacity connect - iOS development course.
-* MemeMe 1.0 and 2.0
-------------------------------------------------------------------------
-## Table of Content
-* 1. General
-* 2. Technology
-* 3. Sources
-------------------------------------------------------------------------
-## 1. General
-Introduction
+An application to creat and share memes with other. The memes can be saved in app after sharing and can be saved in the photos application.
 
+
+## Introduction
+
+The application is developed to meet the requirments for the second and third project in the udacity connect - iOS development course.
+It consist of two versions:
 
 1. MemeME 1.0:
 Create a Meme by inserting an image and typing in a top and bottom text field to share with anyone.
@@ -23,10 +19,25 @@ View sent memes from rows or collection in full view or creat a new meme (MemeMe
 * View shared memes
 * Navigate to Meme Editor to creat a new meme
  
------------------------------------------------------
-## 2 .Sources
-Udacity:
-* Connect - iOS Devlopment
------------------------------------------------------
-Developer
-* Sarah A. Almatawah
+## Get Started
+
+### Requirments
+* IDE: XCode
+* [Developer Account](https://developer.apple.com/) at Apple
+* Optional: Physical device iPhone or iPad running iOS 13 or later
+
+### Install
+
+#### Command Line
+
+Open terminal app and navigate to project folders
+`$ cd /Users/user/project_folders`
+
+Clone project repository
+`$ git clone https://github.com/SamPaddock/meme_V1.git`
+
+## Sources
+[Udacity](https://www.udacity.com/course/ios-developer-nanodegree--nd003)
+
+## Licence
+The content of this repository is licensed under a [Creative Commons Attribution License](https://creativecommons.org/licenses/by/3.0/us/) by Udacity
